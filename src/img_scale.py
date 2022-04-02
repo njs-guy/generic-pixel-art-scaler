@@ -3,7 +3,7 @@
 from PIL import Image
 import os
 
-from attr import has
+#from attr import has
 
 def rescale_image(scale = 2, path=''):
     # image and output vars
