@@ -78,25 +78,42 @@ class App(tk.Tk):
         # menubar.add_cascade(label='Theme', menu=theme_m)
         menubar.add_cascade(label='Help', menu=help_m)
 
+        # Asks user for a file, and then opens the image to scale it
         def openSprite():
             file_path = filedialog.askopenfilename()
-            if file_path != '':
+            if file_path != '': # If file exists
                 #messagebox.showinfo("Info", file_path)
-                spr_scale = int(scale_num.get())
-                rescale_image(spr_scale, file_path)
+
+                # get the scale_num and convert it to an int
+                spr_scale = int(scale_num.get()) 
+
+                # Scale the selected image by the current scale
+                rescale_image(spr_scale, file_path) 
+
+                # Open output folder when done
                 openOutputFolder()
             else:
-                invalidFileError()
+                # Show an error if the file does not exist
+                invalidFileError() 
         
+        # Asks user for a folder, and then opens every image in the folder to scale them
         def openSpriteFolder(path=''):
             file_path = filedialog.askdirectory(title="Select folder...")
-            if file_path != '':
+            if file_path != '': # If folder exists
                 #messagebox.showinfo("Info", file_path)
+
+                # get the scale_num and convert it to an int
                 spr_scale = int(scale_num.get())
 
+                # For each file in the folder
                 for spr in glob.glob(os.path.join(file_path, '*.png')):
+                    
+                    # Open each file as read only
                     with open(os.path.join(os.getcwd(), spr), 'r') as f:
-                        spr = spr.replace("\\", "/") # Replace the back slash with a forward slash
+                        # Replace the back slash with a forward slash
+                        spr = spr.replace("\\", "/")
+
+                        # Scale the current image
                         rescale_image(spr_scale, spr)
                 
                 openOutputFolder()
@@ -108,16 +125,19 @@ class App(tk.Tk):
         
         def openAbout():
             pass
-
+        
+        # Opens the output folder in the file explorer
         def openOutputFolder():
             outputPath = "output"
             outputPath = os.path.realpath(outputPath)
             os.startfile(outputPath)
         
+        # Opens the link to the Github repo in a web browser
         def viewSource():
             url = "https://github.com/njshockey/generic-pixel-art-scaler"
             webbrowser.open_new_tab(url)
         
+        # Displays an invalid file error
         def invalidFileError():
             messagebox.showerror("Error", "Please select a valid file.")
 
@@ -125,6 +145,3 @@ class App(tk.Tk):
 if __name__ == "__main__":
     app = App()
     app.mainloop()
-
-# rescale_image(30, 'src/test.png')
-# print("Output file to output folder.")

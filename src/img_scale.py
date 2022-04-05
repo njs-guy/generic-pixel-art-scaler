@@ -3,8 +3,6 @@
 from PIL import Image
 import os
 
-#from attr import has
-
 def rescale_image(scale = 2, path=''):
     # image and output vars
     img = Image.open(path)
@@ -31,6 +29,7 @@ def rescale_image(scale = 2, path=''):
 def newFileName(filepath):
     # splits the path down to the file name ex: 'test.png'
     filename = filepath.split('/')[-1]
+    
     # removes the extension from the file name ex: 'test' 
     filename = filename.split('.')[0]
     
