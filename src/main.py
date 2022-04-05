@@ -62,9 +62,9 @@ class App(tk.Tk):
         options_m.add_command(label='Exit', command=self.destroy)
 
         # Theme
-        theme_m = Menu(options_m, tearoff=0, activeborderwidth=3)
-        theme_m.add_radiobutton(label='Theme1', command=self.destroy)
-        theme_m.add_radiobutton(label='Theme2', command=self.destroy)
+        # theme_m = Menu(options_m, tearoff=0, activeborderwidth=3)
+        # theme_m.add_radiobutton(label='Theme1', command=self.destroy)
+        # theme_m.add_radiobutton(label='Theme2', command=self.destroy)
 
         # Help - About, Source code
         help_m = Menu(menubar, tearoff=0, activeborderwidth=3)
@@ -73,8 +73,8 @@ class App(tk.Tk):
 
         # Add to window
         menubar.add_cascade(label='Options', menu=options_m)
-        menubar.add_cascade(label='Theme', menu=theme_m)
-        menubar.add_cascade(label='Help', menu=help_m)
+        # menubar.add_cascade(label='Theme', menu=theme_m)
+        menubar.add_cascade(label='Help', menu=help_m) 
 
 # Driver
 if __name__ == "__main__":
