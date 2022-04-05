@@ -2,10 +2,8 @@
 
 import tkinter as tk
 from tkinter import *
-from tkinter import ttk
-from tkinter import filedialog
-from tkinter import messagebox
-import webbrowser
+from tkinter import ttk, filedialog, messagebox
+import webbrowser, os, glob
 
 from img_scale import rescale_image
 
@@ -89,8 +87,15 @@ class App(tk.Tk):
                 invalidFileError()
         
         def openSpriteFolder(path=''):
-            if path != '':
-                pass
+            file_path = filedialog.askdirectory(title="Select folder...")
+            if file_path != '':
+                #messagebox.showinfo("Info", file_path)
+                spr_scale = int(scale_num.get())
+
+                for spr in glob.glob(os.path.join(file_path, '*.png')):
+                    with open(os.path.join(os.getcwd(), spr), 'r') as f:
+                        spr = spr.replace("\\", "/") # Replace the back slash with a forward slash
+                        rescale_image(spr_scale, spr)
             else:
                 invalidFileError()
         
