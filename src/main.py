@@ -1,5 +1,6 @@
 # UI for main window
 
+from importlib.resources import path
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk, filedialog, messagebox
@@ -50,7 +51,7 @@ class App(tk.Tk):
 
         # Options - Settings, Open output folder, Exit
         options_m = Menu(menubar, tearoff=0, activeborderwidth=3)
-        options_m.add_command(label='Open output folder...')
+        options_m.add_command(label='Open output folder...', command=lambda: openOutputFolder())
 
         # Export submenu
         export_submenu = Menu(options_m, tearoff=0, activeborderwidth=3)
@@ -83,6 +84,7 @@ class App(tk.Tk):
                 #messagebox.showinfo("Info", file_path)
                 spr_scale = int(scale_num.get())
                 rescale_image(spr_scale, file_path)
+                openOutputFolder()
             else:
                 invalidFileError()
         
@@ -96,6 +98,8 @@ class App(tk.Tk):
                     with open(os.path.join(os.getcwd(), spr), 'r') as f:
                         spr = spr.replace("\\", "/") # Replace the back slash with a forward slash
                         rescale_image(spr_scale, spr)
+                
+                openOutputFolder()
             else:
                 invalidFileError()
         
@@ -104,6 +108,11 @@ class App(tk.Tk):
         
         def openAbout():
             pass
+
+        def openOutputFolder():
+            outputPath = "output"
+            outputPath = os.path.realpath(outputPath)
+            os.startfile(outputPath)
         
         def viewSource():
             url = "https://github.com/njshockey/generic-pixel-art-scaler"
