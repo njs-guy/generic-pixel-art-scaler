@@ -81,7 +81,7 @@ class App(tk.Tk):
         # Asks user for a file, and then opens the image to scale it
         def open_sprite():
             file_path = filedialog.askopenfilename()
-            if file_path != '': # If file exists
+            try:
                 #messagebox.showinfo("Info", file_path)
 
                 # get the scale_num and convert it to an int
@@ -92,7 +92,7 @@ class App(tk.Tk):
 
                 # Open output folder when done
                 open_output_folder()
-            else:
+            except:
                 # Show an error if the file does not exist
                 invalid_file_error() 
         
