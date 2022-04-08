@@ -18,7 +18,7 @@ def rescale_image(scale = 2, path=''):
 
     # Create scaled image in output folder
     if hasattr(img, 'filename'): # Check if the img has a file name attribute
-        fn = newFileName(str(img.filename))
+        fn = new_file_name(str(img.filename))
         #print(fn)
         scaled_img = img.resize((width, height), Image.NEAREST)
         scaled_img.save(output + "/" + fn + ".png", 'png')
@@ -37,7 +37,7 @@ def rescale_clipboard(scale = 2):
     scaled_img = img.resize((width, height), Image.NEAREST)
     scaled_img.save(output + "clipboard.png", "PNG")
 
-def newFileName(filepath):
+def new_file_name(filepath):
     # splits the path down to the file name ex: 'test.png'
     filename = filepath.split('/')[-1]
     

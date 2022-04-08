@@ -36,13 +36,13 @@ class App(tk.Tk):
         self.lbl_files = ttk.Label(text="Open some pixel art to resize it...")
         self.lbl_files.place(relx=0.5, rely=0.4, anchor=CENTER)
 
-        self.btn_open_file = ttk.Button(text="Open file", width=12, command=lambda: openSprite())
+        self.btn_open_file = ttk.Button(text="Open file", width=12, command=lambda: open_sprite())
         self.btn_open_file.place(relx=0.15, rely=0.6, anchor=CENTER)
 
-        self.btn_open_folder = ttk.Button(text="Open folder", width=12, command=lambda: openSpriteFolder())
+        self.btn_open_folder = ttk.Button(text="Open folder", width=12, command=lambda: open_sprite_folder())
         self.btn_open_folder.place(relx=0.45, rely=0.6, anchor=CENTER)
 
-        self.btn_open_file = ttk.Button(text="Copy from Clipboard", width=20, command=lambda: openSpriteFromClipboard())
+        self.btn_open_file = ttk.Button(text="Copy from Clipboard", width=20, command=lambda: open_sprite_from_clipboard())
         self.btn_open_file.place(relx=0.75, rely=0.6, anchor=CENTER)
 
         # Menu bar ######################
@@ -51,7 +51,7 @@ class App(tk.Tk):
 
         # Options - Settings, Open output folder, Exit
         options_m = Menu(menubar, tearoff=0, activeborderwidth=3)
-        options_m.add_command(label='Open output folder...', command=lambda: openOutputFolder())
+        options_m.add_command(label='Open output folder...', command=lambda: open_output_folder())
 
         # Export submenu
         export_submenu = Menu(options_m, tearoff=0, activeborderwidth=3)
@@ -70,8 +70,8 @@ class App(tk.Tk):
 
         # Help - About, Source code
         help_m = Menu(menubar, tearoff=0, activeborderwidth=3)
-        help_m.add_command(label='About', command=lambda: openAbout())
-        help_m.add_command(label='Source code', command=lambda: viewSource())
+        help_m.add_command(label='About', command=lambda: open_about())
+        help_m.add_command(label='Source code', command=lambda: view_source())
 
         # Add to window
         menubar.add_cascade(label='Options', menu=options_m)
@@ -79,7 +79,7 @@ class App(tk.Tk):
         menubar.add_cascade(label='Help', menu=help_m)
 
         # Asks user for a file, and then opens the image to scale it
-        def openSprite():
+        def open_sprite():
             file_path = filedialog.askopenfilename()
             if file_path != '': # If file exists
                 #messagebox.showinfo("Info", file_path)
@@ -91,13 +91,13 @@ class App(tk.Tk):
                 rescale_image(spr_scale, file_path) 
 
                 # Open output folder when done
-                openOutputFolder()
+                open_output_folder()
             else:
                 # Show an error if the file does not exist
-                invalidFileError() 
+                invalid_file_error() 
         
         # Asks user for a folder, and then opens every image in the folder to scale them
-        def openSpriteFolder(path=''):
+        def open_sprite_folder(path=''):
             file_path = filedialog.askdirectory(title="Select folder...")
             if file_path != '': # If folder exists
                 #messagebox.showinfo("Info", file_path)
@@ -116,36 +116,36 @@ class App(tk.Tk):
                         # Scale the current image
                         rescale_image(spr_scale, spr)
                 
-                openOutputFolder()
+                open_output_folder()
             else:
-                invalidFileError()
+                invalid_file_error()
         
-        def openSpriteFromClipboard():
+        def open_sprite_from_clipboard():
             # get the scale_num and convert it to an int
             spr_scale = int(scale_num.get())
 
             try:                
                 rescale_clipboard(spr_scale)
-                openOutputFolder()
+                open_output_folder()
             except:
                 messagebox.showerror("Error", "Please copy an image to the clipboard first.")
         
-        def openAbout():
+        def open_about():
             pass
         
         # Opens the output folder in the file explorer
-        def openOutputFolder():
+        def open_output_folder():
             outputPath = "output"
             outputPath = os.path.realpath(outputPath)
             os.startfile(outputPath)
         
         # Opens the link to the Github repo in a web browser
-        def viewSource():
+        def view_source():
             url = "https://github.com/njshockey/generic-pixel-art-scaler"
             webbrowser.open_new_tab(url)
         
         # Displays an invalid file error
-        def invalidFileError():
+        def invalid_file_error():
             messagebox.showerror("Error", "Please select a valid file.")
 
 # Driver
