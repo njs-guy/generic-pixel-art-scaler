@@ -1,6 +1,6 @@
 # Code for image rescaling
 
-from PIL import Image
+from PIL import Image, ImageGrab
 import os
 
 def rescale_image(scale = 2, path=''):
@@ -25,6 +25,17 @@ def rescale_image(scale = 2, path=''):
 
     else:
         print(str(img) + " is not a valid image.")
+
+def rescale_clipboard(scale = 2):
+    img = ImageGrab.grabclipboard()
+    output = 'output/'
+
+    # Get the width and height and muliply it by the scale
+    width = img.size[0] * scale
+    height = img.size[1] * scale
+
+    scaled_img = img.resize((width, height), Image.NEAREST)
+    scaled_img.save(output + "clipboard.png", "PNG")
 
 def newFileName(filepath):
     # splits the path down to the file name ex: 'test.png'

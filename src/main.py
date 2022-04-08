@@ -1,12 +1,11 @@
 # UI for main window
 
-from importlib.resources import path
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk, filedialog, messagebox
 import webbrowser, os, glob
 
-from img_scale import rescale_image
+from img_scale import rescale_image, rescale_clipboard
 
 class App(tk.Tk):
     def __init__(self):
@@ -38,12 +37,13 @@ class App(tk.Tk):
         self.lbl_files.place(relx=0.5, rely=0.4, anchor=CENTER)
 
         self.btn_open_file = ttk.Button(text="Open file", width=12, command=lambda: openSprite())
-        self.btn_open_file.place(relx=0.35, rely=0.6, anchor=CENTER)
+        self.btn_open_file.place(relx=0.15, rely=0.6, anchor=CENTER)
 
         self.btn_open_folder = ttk.Button(text="Open folder", width=12, command=lambda: openSpriteFolder())
-        self.btn_open_folder.place(relx=0.65, rely=0.6, anchor=CENTER)
+        self.btn_open_folder.place(relx=0.45, rely=0.6, anchor=CENTER)
 
-        # Copy from clipboard
+        self.btn_open_file = ttk.Button(text="Copy from Clipboard", width=20, command=lambda: openSpriteFromClipboard())
+        self.btn_open_file.place(relx=0.75, rely=0.6, anchor=CENTER)
 
         # Menu bar ######################
         menubar = Menu(self, relief=FLAT, bd=0)
@@ -121,7 +121,14 @@ class App(tk.Tk):
                 invalidFileError()
         
         def openSpriteFromClipboard():
-            pass
+            # get the scale_num and convert it to an int
+            spr_scale = int(scale_num.get())
+
+            try:                
+                rescale_clipboard(spr_scale)
+                openOutputFolder()
+            except:
+                messagebox.showerror("Error", "Please copy an image to the clipboard first.")
         
         def openAbout():
             pass
