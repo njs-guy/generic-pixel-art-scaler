@@ -6,6 +6,7 @@ from tkinter import ttk, filedialog, messagebox
 import webbrowser, os, glob
 
 from img_scale import rescale_image, rescale_clipboard
+from about import About
 
 class App(tk.Tk):
     def __init__(self):
@@ -27,11 +28,11 @@ class App(tk.Tk):
         export_type.set('0') # Default value
 
         # UI ######################
-        self.sb_scale = ttk.Spinbox(from_=2, to=500,textvariable=scale_num, wrap=False)
-        self.sb_scale.place(relx=0.5, rely=0.1, anchor=CENTER)
-
         self.lbl_scale = ttk.Label(text="Scale:")
         self.lbl_scale.place(relx=0.25, rely=0.1, anchor=CENTER)
+
+        self.sb_scale = ttk.Spinbox(from_=2, to=500,textvariable=scale_num, wrap=False)
+        self.sb_scale.place(relx=0.5, rely=0.1, anchor=CENTER)
         
         self.lbl_files = ttk.Label(text="Open some pixel art to resize it...")
         self.lbl_files.place(relx=0.5, rely=0.4, anchor=CENTER)
@@ -54,11 +55,11 @@ class App(tk.Tk):
         options_m.add_command(label='Open output folder...', command=lambda: open_output_folder())
 
         # Export submenu
-        export_submenu = Menu(options_m, tearoff=0, activeborderwidth=3)
-        export_submenu.add_radiobutton(label='PNG')
-        export_submenu.add_radiobutton(label='Static GIF')
-        export_submenu.add_radiobutton(label='JPEG')
-        options_m.add_cascade(label='Export as...', menu=export_submenu)
+        #export_submenu = Menu(options_m, tearoff=0, activeborderwidth=3)
+        #export_submenu.add_radiobutton(label='PNG')
+        #export_submenu.add_radiobutton(label='Static GIF')
+        #export_submenu.add_radiobutton(label='JPEG')
+        #options_m.add_cascade(label='Export as...', menu=export_submenu)
 
         options_m.add_separator()
         options_m.add_command(label='Exit', command=self.destroy)
@@ -70,7 +71,7 @@ class App(tk.Tk):
 
         # Help - About, Source code
         help_m = Menu(menubar, tearoff=0, activeborderwidth=3)
-        help_m.add_command(label='About', command=lambda: open_about())
+        help_m.add_command(label='About', command=lambda: self.open_about())
         help_m.add_command(label='Source code', command=lambda: view_source())
 
         # Add to window
@@ -129,10 +130,7 @@ class App(tk.Tk):
                 open_output_folder()
             except:
                 messagebox.showerror("Error", "Please copy an image to the clipboard first.")
-        
-        def open_about():
-            pass
-        
+
         # Opens the output folder in the file explorer
         def open_output_folder():
             outputPath = "output"
@@ -147,6 +145,10 @@ class App(tk.Tk):
         # Displays an invalid file error
         def invalid_file_error():
             messagebox.showerror("Error", "Please select a valid file.")
+    
+    def open_about(self):
+        aw = About(self)
+        aw.grab_set()
 
 # Driver
 if __name__ == "__main__":
