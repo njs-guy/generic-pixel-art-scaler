@@ -124,8 +124,8 @@ class App(tk.Tk):
         def open_sprite_from_clipboard():
             # get the scale_num and convert it to an int
             spr_scale = int(scale_num.get())
-
-            try:                
+            
+            try:
                 rescale_clipboard(spr_scale)
                 open_output_folder()
             except:
