@@ -129,7 +129,7 @@ class App(tk.Tk):
                 rescale_clipboard(spr_scale)
                 open_output_folder()
             except:
-                messagebox.showerror("Error", "Please copy an image to the clipboard first.")
+                messagebox.showerror("Error", "Please copy a valid image to the clipboard.")
 
         # Opens the output folder in the file explorer
         def open_output_folder():
