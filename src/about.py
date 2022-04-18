@@ -4,6 +4,8 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 
+from version import get_gpas_version
+
 class About(tk.Toplevel):
     def __init__(self, parent):
         super().__init__(parent)
@@ -13,7 +15,7 @@ class About(tk.Toplevel):
         self.resizable(False, False)
         self.title('About GPAS')
 
-        version = "1.0.0"
+        version = get_gpas_version()
         lbl_about = ttk.Label(self, text=f"Generic Pixel Art Scaler v{version}")
         lbl_about.pack(ipadx=10, ipady=10, side='top', fill='x')
 
