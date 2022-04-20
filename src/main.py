@@ -16,6 +16,7 @@ class App(tk.Tk):
         self.geometry('400x200')
         self.resizable(False, False)
         self.title('Generic Pixel Art Scaler')
+        self.iconbitmap('./src/img/gpas_logo.ico')
 
         # Variables
         scale_num = StringVar()

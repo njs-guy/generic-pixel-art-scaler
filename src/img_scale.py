@@ -8,7 +8,7 @@ def rescale_image(scale = 2, path=''):
     img = Image.open(path)
     output = 'output'
 
-    # Get the width and height and muliply it by the scale
+    # Get the width and height and multiply it by the scale
     width = img.size[0] * scale
     height = img.size[1] * scale
     
