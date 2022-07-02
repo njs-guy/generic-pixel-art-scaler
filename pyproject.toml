@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "generic-pixel-art-scaler"
+version = "0.0.1"
+description = "An easy way to bulk resize pixel art"
+readme = "README.md"
+license = {text = "MIT"}
+dependencies = ["tkinter", "Pillow"]
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10",
+    "License :: MIT",
+]
