@@ -14,10 +14,10 @@ class About(tk.Toplevel):
         self.geometry('500x300')
         self.resizable(False, False)
         self.title('About GPAS')
-        self.iconbitmap('./src/img/gpas_logo.ico')
+        self.iconbitmap('./old/src/img/gpas_logo.ico')
 
         version = get_gpas_version()
-        self.logo = tk.PhotoImage(file="./src/img/gpas_logo.png")
+        self.logo = tk.PhotoImage(file="./old/src/img/gpas_logo.png")
         lbl_about = ttk.Label(self, 
             image=self.logo, 
             text=f"Generic Pixel Art Scaler v{version}", 
