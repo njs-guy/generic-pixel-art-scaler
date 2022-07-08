@@ -3,13 +3,14 @@
         xmlns:vm="using:GenericPixelArtScaler.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        Width="400" Height="300"
+        Width="400" Height="200"
         xmlns:views="clr-namespace:GenericPixelArtScaler.Views"
         x:Class="GenericPixelArtScaler.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="Generic Pixel Art Scaler">
-  <StackPanel Margin="10">
-    <views:ScaleUpDown/>
+  <StackPanel Margin="10" Spacing="10">
+    <views:ScaleUpDown />
+    <views:OpenButtons Margin="0,20,0,0"/>
   </StackPanel>
 
 </Window>
