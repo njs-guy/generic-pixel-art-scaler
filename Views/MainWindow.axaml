@@ -10,9 +10,12 @@
         Title="Generic Pixel Art Scaler"
         TransparencyLevelHint="Blur"
         Background="Transparent">
-  <StackPanel Margin="10" Spacing="10">
-    <views:ScaleUpDown />
-    <views:OpenButtons Margin="0,20,0,0"/>
-  </StackPanel>
+  <DockPanel>
+    <views:MenuStrip DockPanel.Dock="Top"/>
+    <StackPanel DockPanel.Dock="Bottom" Margin="10" Spacing="10">
+      <views:ScaleUpDown />
+      <views:OpenButtons Margin="0,20,0,0"/>
+    </StackPanel>  
+  </DockPanel>
 
 </Window>
