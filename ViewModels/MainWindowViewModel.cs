@@ -32,7 +32,11 @@ namespace GenericPixelArtScaler.ViewModels
 
         public void ShowSource()
         {
-            Console.WriteLine("Wow");
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = "https://github.com/njshockey/generic-pixel-art-scaler",
+                UseShellExecute = true
+            });
         }
     }
 }
