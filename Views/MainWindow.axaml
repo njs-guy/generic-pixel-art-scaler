@@ -7,7 +7,9 @@
         xmlns:views="clr-namespace:GenericPixelArtScaler.Views"
         x:Class="GenericPixelArtScaler.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Generic Pixel Art Scaler">
+        Title="Generic Pixel Art Scaler"
+        TransparencyLevelHint="Blur"
+        Background="Transparent">
   <StackPanel Margin="10" Spacing="10">
     <views:ScaleUpDown />
     <views:OpenButtons Margin="0,20,0,0"/>
