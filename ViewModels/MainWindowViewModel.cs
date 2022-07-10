@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.Styling;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
 
@@ -16,12 +17,11 @@ namespace GenericPixelArtScaler.ViewModels
     public class MainWindowViewModel : ReactiveWindow<MainWindowViewModel>
     {
         public Interaction<AboutWindow, MenuStrip?> OpenAbout { get; }
-        public string Greeting => "Welcome to Avalonia!";
+        public bool darkMode = true;
 
         public MainWindowViewModel()
         {
             OpenAbout = new Interaction<AboutWindow, MenuStrip?>();
-
         }
 
         public void OpenAboutWindow()
@@ -37,6 +37,11 @@ namespace GenericPixelArtScaler.ViewModels
                 FileName = "https://github.com/njshockey/generic-pixel-art-scaler",
                 UseShellExecute = true
             });
+        }
+
+        public void ExitApp()
+        {
+            System.Environment.Exit(0);
         }
     }
 }
