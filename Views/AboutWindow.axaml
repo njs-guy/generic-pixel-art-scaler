@@ -4,9 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Width="500" Height="400"
         x:Class="GenericPixelArtScaler.Views.AboutWindow"
-        Title="About GPAS"
-        TransparencyLevelHint="Blur"
-        Background="Transparent">
+        Title="About GPAS" >
   <StackPanel VerticalAlignment="Center">
     <Image Source="avares://GenericPixelArtScaler/Assets/gpas_logo.png"
            Height="160"

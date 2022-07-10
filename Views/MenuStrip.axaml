@@ -7,8 +7,6 @@
   <Menu>
     <MenuItem Header="_Options">
       <MenuItem Header="Open output _folder" />
-      <MenuItem Header="_Dark mode" />
-      <MenuItem Header="Enable _transparency" />
       <Separator/>
       <MenuItem Header="_Exit" Command="{Binding ExitApp}" />
     </MenuItem>
