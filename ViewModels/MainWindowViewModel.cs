@@ -7,6 +7,8 @@ using ReactiveUI;
 using OpenCvSharp;
 
 using System;
+using System.IO;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
@@ -47,29 +49,78 @@ namespace GenericPixelArtScaler.ViewModels
 
         public void ResizeImage(string path, int scale = 2)
         {
-            Mat img = Cv2.ImRead(path, ImreadModes.Unchanged);
+            string output = "output";
+
+            if(Directory.Exists(output) == false)
+            {
+                try
+                {
+                    Directory.CreateDirectory(output);
+                }
+                catch(Exception e)
+                {
+                    ShowMessage($"ERROR. {e}");
+                    return;
+                }
+            }
+
+            Mat img;
+
+            try
+            {
+                img = Cv2.ImRead(path, ImreadModes.Unchanged); // Open image
+                img.Resize(OpenCvSharp.Size.Zero, scale, scale, InterpolationFlags.Nearest); // Resize image
+            }
+            catch(Exception e)
+            {
+                ShowMessage($"ERROR. {e}");
+                return;
+            }
+
+            try
+            {
+                img.ImWrite(output + "/" + "img.png"); // Save image to file
+            }
+            catch(Exception e)
+            {
+                ShowMessage($"ERROR. {e}");
+            }
+
+            img.Dispose(); // Clear memory
         }
 
-        public void showMessage(string message, string title = "GPAS")
+        public void ShowMessage(string message, string title = "GPAS")
         {
             var messageBox = MessageBox.Avalonia.MessageBoxManager
                 .GetMessageBoxStandardWindow(title, message);
             messageBox.Show();
         }
 
+        public void OpenOutputFolder()
+        {
+            try
+            {
+                Process.Start(@"output");
+            }
+            catch(Exception e)
+            {
+                ShowMessage($"ERROR. {e}");
+            }
+        }
+
         public void OnOpenFile()
         {
-            showMessage("Open file");
+            ResizeImage("input/sprite1.png");
         }
 
         public void OnOpenFolder()
         {
-            showMessage("Open folder");
+            ShowMessage("Open folder");
         }
 
         public void OnCopyFromCb()
         {
-            showMessage("Copy from clipboard");
+            ShowMessage("Copy from clipboard");
         }
     }
 }
