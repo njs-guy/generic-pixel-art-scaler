@@ -7,9 +7,9 @@
   <StackPanel Orientation="Vertical" Spacing="10">
     <TextBlock HorizontalAlignment="Center" >Open some pixel art to resize it...</TextBlock>
     <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
-      <Button>Open file</Button>
-      <Button>Open folder</Button>
-      <Button>Copy from clipboard</Button>
+      <Button Command="{Binding OnOpenFile}">Open file</Button>
+      <Button Command="{Binding OnOpenFolder}">Open folder</Button>
+      <Button Command="{Binding OnCopyFromCb}">Copy from clipboard</Button>
     </StackPanel>
   </StackPanel>
 </UserControl>

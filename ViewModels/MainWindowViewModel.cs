@@ -4,6 +4,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Styling;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
+using OpenCvSharp;
 
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,33 @@ namespace GenericPixelArtScaler.ViewModels
         public void ExitApp()
         {
             System.Environment.Exit(0);
+        }
+
+        public void ResizeImage(string path, int scale = 2)
+        {
+            Mat img = Cv2.ImRead(path, ImreadModes.Unchanged);
+        }
+
+        public void showMessage(string message, string title = "GPAS")
+        {
+            var messageBox = MessageBox.Avalonia.MessageBoxManager
+                .GetMessageBoxStandardWindow(title, message);
+            messageBox.Show();
+        }
+
+        public void OnOpenFile()
+        {
+            showMessage("Open file");
+        }
+
+        public void OnOpenFolder()
+        {
+            showMessage("Open folder");
+        }
+
+        public void OnCopyFromCb()
+        {
+            showMessage("Copy from clipboard");
         }
     }
 }
