@@ -57,12 +57,20 @@ namespace GenericPixelArtScaler.ViewModels
                 return; // Cannot write to output, do nothing.
             }
 
-            Mat img;
+            Mat img; // source image
+            Mat resized; // resized image
 
             try
             {
                 img = Cv2.ImRead(path, ImreadModes.Unchanged); // Open image
-                img.Resize(OpenCvSharp.Size.Zero, scale, scale, InterpolationFlags.Nearest); // Resize image
+
+                int width = img.Width * scale;
+                int height = img.Height * scale;
+                OpenCvSharp.Size dim;
+                dim.Width = width;
+                dim.Height = height;
+
+                resized = img.Resize(dim, interpolation: InterpolationFlags.Nearest);
             }
             catch(Exception e)
             {
@@ -72,14 +80,15 @@ namespace GenericPixelArtScaler.ViewModels
 
             try
             {
-                img.ImWrite(output + "/" + "img.png"); // Save image to file
+                resized.ImWrite(output + "/" + "img.png"); // Save image to file
             }
             catch(Exception e)
             {
                 ShowMessage($"ERROR. {e}");
             }
 
-            img.Dispose(); // Clear memory
+            img.Dispose();
+            resized.Dispose(); // Clear memory
         }
 
         public void ShowMessage(string message, string title = "GPAS")
