@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
+using System.Runtime.InteropServices; // Check OS
 
 using GenericPixelArtScaler.Views;
 
@@ -99,8 +100,21 @@ namespace GenericPixelArtScaler.ViewModels
         public void OpenOutputFolder()
         {
             try
-            {
-                Process.Start(@"output");
+            {   
+                if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) // If on Windows
+                {
+                    Process.Start("explorer.exe", @"output");
+                }
+
+                if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) // If on Linux
+                {
+                    // Open Linux file explorer
+                }
+
+                if(RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) // If on Mac
+                {
+                    // Open Mac file explorer
+                }
             }
             catch(Exception e)
             {
@@ -111,6 +125,7 @@ namespace GenericPixelArtScaler.ViewModels
         public void OnOpenFile()
         {
             ResizeImage("input/sprite1.png");
+            OpenOutputFolder();
         }
 
         public void OnOpenFolder()

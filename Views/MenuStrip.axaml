@@ -6,7 +6,7 @@
              x:Class="GenericPixelArtScaler.Views.MenuStrip">
   <Menu>
     <MenuItem Header="_Options">
-      <MenuItem Header="Open output _folder" />
+      <MenuItem Header="Open output _folder" Command="{Binding OpenOutputFolder}" />
       <Separator/>
       <MenuItem Header="_Exit" Command="{Binding ExitApp}" />
     </MenuItem>
