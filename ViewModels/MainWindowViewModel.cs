@@ -126,16 +126,19 @@ namespace GenericPixelArtScaler.ViewModels
                 if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) // If on Windows
                 {
                     Process.Start("explorer.exe", @"output");
+                    return;
                 }
 
                 if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) // If on Linux
                 {
-                    // Open Linux file explorer
+                    ShowMessage("You are on Linux. The default file explorer is supposed to open but I haven't made that yet.");
+                    return;
                 }
 
                 if(RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) // If on Mac
                 {
-                    // Open Mac file explorer
+                    ShowMessage("You are on Mac OSX. The default file explorer is supposed to open but I don't have a Mac to test this. If you want to add this yourself, contributions are welcome!");
+                    return;
                 }
             }
             catch(Exception e)
