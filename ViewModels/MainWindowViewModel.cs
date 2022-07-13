@@ -52,17 +52,9 @@ namespace GenericPixelArtScaler.ViewModels
         {
             string output = "output";
 
-            if(Directory.Exists(output) == false)
+            if(CheckOutputFolder() == false)
             {
-                try
-                {
-                    Directory.CreateDirectory(output);
-                }
-                catch(Exception e)
-                {
-                    ShowMessage($"ERROR. {e}");
-                    return;
-                }
+                return; // Cannot write to output, do nothing.
             }
 
             Mat img;
@@ -97,8 +89,38 @@ namespace GenericPixelArtScaler.ViewModels
             messageBox.Show();
         }
 
+        // Checks if there is an output directory. If not, creates it.
+        public bool CheckOutputFolder()
+        {
+            //bool result = false;
+            string path = "output";
+
+            if (Directory.Exists(path) == false)
+            {
+                try
+                {
+                    Directory.CreateDirectory(path);
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    ShowMessage($"ERROR. {e}");
+                    return false;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         public void OpenOutputFolder()
         {
+            if (CheckOutputFolder() == false)
+            {
+                return; // Cannot write to output. Do nothing.
+            }
+
             try
             {   
                 if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) // If on Windows
